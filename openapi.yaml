@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: Team API
+  version: 1.0.0
+  description: API för att hämta team och teammedlemmar.
+
+paths:
+  /individ/{idTyp}/{idVarde}/team:
+    get:
+      tags: [ TeamController ]
+      operationId: getIndividTeam
+      summary: Hämta team för en individ
+      description: Returnerar de team som individen, identifierad via angiven id-typ och id-värde, tillhör.
+      parameters:
+        - name: idTyp
+          in: path
+          required: true
+          description: Typ av identifierare som används för att identifiera individen
+          schema:
+            type: string
+            example: kortnummer
+        - name: idVarde
+          in: path
+          required: true
+          description: Identifierarens värde, t.ex. ett kortnummer
+          schema:
+            type: string
+            example: "123456789"
+      responses:
+        '200':
+          description: Team hämtade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIndividTeamResponse'
+              example:
+                team:
+                  - id: 42
+                    namn: "Team Stockholm Nord"
+                    kontor: "Stockholm"
+        '400':
+          description: Ogiltig idTyp eller idVarde
+        '404':
+          description: Individen hittades inte
+        '500':
+          description: Internt serverfel
+
+  /team/{teamId}/individer:
+    get:
+      tags: [ TeamController ]
+      operationId: getTeamIndivider
+      summary: Hämta medlemmar i ett team
+      description: Returnerar alla individer som är medlemmar i det angivna teamet.
+      parameters:
+        - name: teamId
+          in: path
+          required: true
+          description: Teamets unika ID
+          schema:
+            type: integer
+            example: 42
+      responses:
+        '200':
+          description: Teammedlemmar hämtade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamMembersResponse'
+              example:
+                individer:
+                  - typId: "4c34906c-03d9-425f-9a1a-062ef6eb88c7"
+                    varde: "123456789"
+        '400':
+          description: Ogiltigt teamId
+        '404':
+          description: Team hittades inte
+        '500':
+          description: Internt serverfel
+
+components:
+  schemas:
+    Team:
+      type: object
+      description: Ett team
+      properties:
+        id:
+          type: integer
+          description: Teamets unika ID
+        namn:
+          type: string
+          description: Teamets namn
+        kontor:
+          type: string
+          description: Kontor som teamet tillhör
+      required:
+        - id
+        - namn
+        - kontor
+      example:
+        id: 42
+        namn: "Team Stockholm Nord"
+        kontor: "Stockholm"
+    Idtyp:
+      type: object
+      description: Identifierare för en individ
+      properties:
+        typId:
+          type: string
+          format: uuid
+          description: Unikt ID som identifierar vilken typ av värde som anges
+        varde:
+          type: string
+          description: ID-värde som identifieras av typ
+      required:
+        - typId
+        - varde
+      example:
+        typId: "4c34906c-03d9-425f-9a1a-062ef6eb88c7"
+        varde: "123456789"
+    GetIndividTeamResponse:
+      type: object
+      description: Svar innehållande lista av team som individen tillhör
+      properties:
+        team:
+          type: array
+          description: Lista av team som individen tillhör
+          items:
+            $ref: '#/components/schemas/Team'
+      required:
+        - team
+    GetTeamMembersResponse:
+      type: object
+      description: Svar innehållande lista av teammedlemmar
+      properties:
+        individer:
+          type: array
+          description: Lista av individer som är medlemmar i teamet
+          items:
+            $ref: '#/components/schemas/Idtyp'
+      required:
+        - individer
