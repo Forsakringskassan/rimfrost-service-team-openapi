@@ -1,3 +1,9 @@
+## 0.0.2 (2026-08-19)
+
+### Bug Fixes
+
+-  correct group to se.fk.rimfrost.team and bump version to 0.0.2 ([706e2](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/706e2b217c5c09b) Ulf Slunga)  
+
 # rimfrost-service-team-openapi changelog
 
 Changelog of rimfrost-service-team-openapi.
