@@ -1,3 +1,9 @@
+## 0.1.0 (2026-08-25)
+
+### Features
+
+-  add GET /individ/{idTyp}/{idVarde}/behorigheter endpoint ([e4731](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/e4731a23982aac2) LisaWedin_Ductus)  
+
 ## 0.0.2 (2026-08-19)
 
 ### Bug Fixes
