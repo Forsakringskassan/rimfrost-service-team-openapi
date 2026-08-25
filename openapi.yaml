@@ -45,6 +45,44 @@ paths:
         '500':
           description: Internt serverfel
 
+  /individ/{idTyp}/{idVarde}/behorigheter:
+    get:
+      tags: [ TeamController ]
+      operationId: getBehorigheter
+      summary: Hämta behörigheter för en handläggare
+      description: Returnerar de behörigheter som handläggaren, identifierad via angiven id-typ och id-värde, har.
+      parameters:
+        - name: idTyp
+          in: path
+          required: true
+          description: Typ av identifierare som används för att identifiera handläggaren
+          schema:
+            type: string
+            example: kortnummer
+        - name: idVarde
+          in: path
+          required: true
+          description: Identifierarens värde, t.ex. ett kortnummer
+          schema:
+            type: string
+            example: "123456789"
+      responses:
+        '200':
+          description: Behörigheter hämtade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBehorigheterResponse'
+              example:
+                behorigheter:
+                  - SID
+        '400':
+          description: Ogiltig idTyp eller idVarde
+        '404':
+          description: Handläggaren hittades inte
+        '500':
+          description: Internt serverfel
+
   /team/{teamId}/individer:
     get:
       tags: [ TeamController ]
@@ -139,3 +177,20 @@ components:
             $ref: '#/components/schemas/Idtyp'
       required:
         - individer
+    Behorighet:
+      type: string
+      description: En behörighet en handläggare kan ha
+      enum:
+        - SID
+      example: SID
+    GetBehorigheterResponse:
+      type: object
+      description: Svar innehållande lista av behörigheter för en handläggare
+      properties:
+        behorigheter:
+          type: array
+          description: Lista av behörigheter handläggaren har
+          items:
+            $ref: '#/components/schemas/Behorighet'
+      required:
+        - behorigheter
