@@ -45,12 +45,12 @@ paths:
         '500':
           description: Internt serverfel
 
-  /individ/{idTyp}/{idVarde}/behorigheter:
+  /individ/{idTyp}/{idVarde}/hasSidPermission:
     get:
       tags: [ TeamController ]
-      operationId: getBehorigheter
-      summary: Hämta behörigheter för en handläggare
-      description: Returnerar de behörigheter som handläggaren, identifierad via angiven id-typ och id-värde, har.
+      operationId: hasSidPermission
+      summary: Kontrollera om en handläggare har SID-behörighet
+      description: Returnerar om handläggaren, identifierad via angiven id-typ och id-värde, har SID-behörighet.
       parameters:
         - name: idTyp
           in: path
@@ -68,14 +68,12 @@ paths:
             example: "123456789"
       responses:
         '200':
-          description: Behörigheter hämtade
+          description: Kontroll genomförd
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetBehorigheterResponse'
-              example:
-                behorigheter:
-                  - SID
+                type: boolean
+              example: true
         '400':
           description: Ogiltig idTyp eller idVarde
         '404':
@@ -177,20 +175,3 @@ components:
             $ref: '#/components/schemas/Idtyp'
       required:
         - individer
-    Behorighet:
-      type: string
-      description: En behörighet en handläggare kan ha
-      enum:
-        - SID
-      example: SID
-    GetBehorigheterResponse:
-      type: object
-      description: Svar innehållande lista av behörigheter för en handläggare
-      properties:
-        behorigheter:
-          type: array
-          description: Lista av behörigheter handläggaren har
-          items:
-            $ref: '#/components/schemas/Behorighet'
-      required:
-        - behorigheter
