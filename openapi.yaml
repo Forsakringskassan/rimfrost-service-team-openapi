@@ -48,7 +48,7 @@ paths:
   /individ/{idTyp}/{idVarde}/hasSidPermission:
     get:
       tags: [ TeamController ]
-      operationId: getHasSidPermission
+      operationId: hasSidPermission
       summary: Kontrollera om en handläggare har SID-behörighet
       description: Returnerar om handläggaren, identifierad via angiven id-typ och id-värde, har SID-behörighet.
       parameters:
