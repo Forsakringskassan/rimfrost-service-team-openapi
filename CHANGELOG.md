@@ -1,3 +1,10 @@
+## 0.1.1 (2026-08-31)
+
+### Bug Fixes
+
+-  rename to hasSidPermission ([2beb1](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/2beb1e7006df1d7) Nils Elveros)  
+-  replace getBehorigheter with hasSidPermission ([eda6d](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/eda6d96e3517d1e) Nils Elveros)  
+
 ## 0.1.0 (2026-08-25)
 
 ### Features
