@@ -45,42 +45,6 @@ paths:
         '500':
           description: Internt serverfel
 
-  /individ/{idTyp}/{idVarde}/hasSidPermission:
-    get:
-      tags: [ TeamController ]
-      operationId: hasSidPermission
-      summary: Kontrollera om en handläggare har SID-behörighet
-      description: Returnerar om handläggaren, identifierad via angiven id-typ och id-värde, har SID-behörighet.
-      parameters:
-        - name: idTyp
-          in: path
-          required: true
-          description: Typ av identifierare som används för att identifiera handläggaren
-          schema:
-            type: string
-            example: kortnummer
-        - name: idVarde
-          in: path
-          required: true
-          description: Identifierarens värde, t.ex. ett kortnummer
-          schema:
-            type: string
-            example: "123456789"
-      responses:
-        '200':
-          description: Kontroll genomförd
-          content:
-            application/json:
-              schema:
-                type: boolean
-              example: true
-        '400':
-          description: Ogiltig idTyp eller idVarde
-        '404':
-          description: Handläggaren hittades inte
-        '500':
-          description: Internt serverfel
-
   /team/{teamId}/individer:
     get:
       tags: [ TeamController ]
