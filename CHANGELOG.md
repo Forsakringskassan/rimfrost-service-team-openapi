@@ -1,3 +1,9 @@
+## 0.1.2 (2026-09-30)
+
+### Bug Fixes
+
+-  remove hasSidPermission endpoint from Team API ([13964](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/1396452ccf5805b) Ulf Slunga)  
+
 ## 0.1.1 (2026-08-31)
 
 ### Bug Fixes
