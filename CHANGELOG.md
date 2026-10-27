@@ -1,3 +1,9 @@
+## 0.1.3 (2026-10-27)
+
+### Bug Fixes
+
+-  Replace github workflows ([5c9df](https://github.com/Forsakringskassan/rimfrost-service-team-openapi/commit/5c9df2e1eac913d) Lars Persson)  
+
 ## 0.1.2 (2026-09-30)
 
 ### Bug Fixes
